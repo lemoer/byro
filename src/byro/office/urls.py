@@ -10,6 +10,7 @@ from .views import (
     transactions,
     upload,
     users,
+    processing_tags,
 )
 
 app_name = "office"
@@ -145,6 +146,8 @@ urlpatterns = [
         accounts.AccountDeleteView.as_view(),
         name="finance.accounts.delete",
     ),
+    url(r"^processing_tags/$", processing_tags.ProcessingTagListView.as_view(), name="finance.processing_tags.list"),
+    url(r"^processing_tags/add$", processing_tags.ProcessingTagCreateView.as_view(), name="finance.processing_tags.add"),
     url("^mails/(?P<pk>[0-9]+)$", mails.MailDetail.as_view(), name="mails.mail.view"),
     url(
         "^mails/(?P<pk>[0-9]+)/copy$", mails.MailCopy.as_view(), name="mails.mail.copy"

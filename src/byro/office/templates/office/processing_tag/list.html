@@ -1,0 +1,36 @@
+{% extends "office/base_headline.html" %}
+
+{% load i18n %}
+
+{% block headline %}{% trans "Processing Tags" %}{% endblock %}
+
+{% block content %}
+<p>
+<a href="{% url "office:finance.processing_tags.add" %}" class="btn btn-success">
+    <span class="fa fa-plus"></span> {% trans "Add new processing tag" %}
+</a>
+</p>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th class="table-column-small">{% trans "Token" %}</th>
+            <th class="table-column-small">{% trans "Associates Account" %}</th>
+            <th class="table-column-small">{% trans "Associates Member" %}</th>
+            <th class="table-column-small">{% trans "Check Memo" %}</th>
+            <th class="table-column-small">{% trans "Check Other Party" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for processing_tag in processing_tags %}
+            <tr>
+                <td>{{ processing_tag.token }}</td>
+                <td>{{ processing_tag.account | default:"" }}</td>
+                <td>{{ processing_tag.member | default:""  }}</td>
+                <td>{{ processing_tag.check_memo }}</td>
+                <td>{{ processing_tag.check_other }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% include "office/pagination.html" %}
+{% endblock %}
